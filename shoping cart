@@ -1,0 +1,245 @@
+import java.util.Scanner;
+
+public class ShopingCart {
+
+    static double coucost;
+    static String s;
+    static int t;
+
+    public static void viewcart() {
+        if (Pen.quantity > 0) {
+            System.out.println("The Pens costs " + Pen.quantity * Pen.price + " euros");
+        }
+        if (Pencil.quantity > 0) {
+            System.out.println("The Pencils costs " + Pencil.quantity * Pencil.price + " euros");
+        }
+        if (Notebook.quantity > 0) {
+            System.out.println("The Notebooks costs " + Notebook.quantity * Notebook.price + " euros");
+        }
+        if (Paper.quantity > 0) {
+            System.out.println("The Papers costs " + Paper.quantity * Paper.price + " euros");
+        }
+    }
+
+
+    public static void category() {
+        int i;
+        for (i = 0; i < Buyer.Email.size(); i++) {
+            if (Buyer.Email.get(i).equals(Main.usernamee)) {
+                s = Buyer.Category.get(i);
+                t = Buyer.points.get(i);
+
+
+                break;
+            }
+        }
+    }
+
+    public static void couriercost() {
+
+        category();
+
+        coucost = (Pen.penlist.get(Main.i) * Pen.price + Pencil.pencillist.get(Main.i) * Pencil.price + Notebook.notelist.get(Main.i) * Notebook.price + Paper.paplist.get(Main.i) * Paper.price) * 0.02;
+
+        if (coucost < 3) {
+
+            coucost = 3;
+
+            if (s == "Bronze") {
+                System.out.println("Courier costs " + coucost + " euros");
+            } else if (s == "Silver") {
+                coucost = coucost * 0.5;
+            } else
+                coucost = 0;
+
+        }
+    }
+
+    static double sum;
+
+    public static void calculatenet() {
+        sum =Pen.penlist.get(Main.i) * Pen.price + Pencil.pencillist.get(Main.i) * Pencil.price + Notebook.notelist.get(Main.i) * Notebook.price + Paper.paplist.get(Main.i) * Paper.price;
+
+
+        couriercost();
+
+        double total = sum + coucost;
+
+        System.out.println("Total : " + total);
+
+    }
+
+    public static void checkout() throws Exception {
+
+        if (Pen.penlist.get(Main.i).equals(0) && Pencil.pencillist.get(Main.i).equals(0) && Paper.paplist.get(Main.i).equals(0) && Notebook.notelist.get(Main.i).equals(0)) {
+            System.out.println("Your cart is empty");
+            Buyer.choice();
+        } else {
+            System.out.println("Pen: " + Pen.penlist.get(Main.i));
+            System.out.println("Pencil: " + Pencil.pencillist.get(Main.i));
+            System.out.println("Notebook: " + Notebook.notelist.get(Main.i));
+            System.out.println("Paper: " + Paper.paplist.get(Main.i));
+
+            ShopingCart.viewcart();
+            ShopingCart.calculatenet();
+            System.out.println("Checkout? (y/n)\n");
+            Scanner io = new Scanner(System.in);
+            String c = io.nextLine();
+            if (c.equals("y")) {
+                Buyer.bonusSetCategory();
+                Pen.quantity = 0;
+                Paper.quantity = 0;
+                Notebook.quantity = 0;
+                Pencil.quantity = 0;
+
+                Pen.penlist.set(Main.i,0);
+                Pencil.pencillist.set(Main.i,0);
+                Notebook.notelist.set(Main.i,0);
+                Paper.paplist.set(Main.i,0);
+                Buyer.store();
+            } else
+                Buyer.store();
+        }
+    }
+
+    public static void showcart() throws Exception {
+
+        if (Pen.penlist.isEmpty() && Pencil.pencillist.isEmpty() && Paper.paplist.isEmpty() && Notebook.notelist.isEmpty()) {
+            System.out.println("your cart is empty");
+            Buyer.choice();
+        } else {
+            System.out.println("Pen: " + Pen.penlist.get(Main.i));
+            System.out.println("Pencil: " + Pencil.pencillist.get(Main.i));
+            System.out.println("Notebook: " + Notebook.notelist.get(Main.i));
+            System.out.println("Paper: " + Paper.paplist.get(Main.i));
+            System.out.println("\n1) delete order\n2) change order\n3) checkout\n");
+            Scanner em = new Scanner(System.in);
+            String f = em.nextLine();
+            if (f.equals("1")) {
+                clearcart();
+                Buyer.choice();
+            } else if (f.equals("2")) {
+                System.out.println("In which product you want to change the amount?");
+                Scanner m = new Scanner(System.in);
+                String s = m.nextLine();
+                if (s.equals("Pen")) {
+                    if (Pen.penlist.get(Main.i) > 0) {
+                        System.out.println("How much you want?");
+                        Scanner b = new Scanner(System.in);
+                        int a = b.nextInt();
+                        if (a > Pen.quantity + Pen.stock) {
+                            System.out.println("We don't have that amount");
+                            Buyer.choice();
+                        } else if (a >= 0) {
+                            Pen.stock = Pen.stock + Pen.quantity - a;
+                            Pen.quantity = a;
+                            Pen.penlist.set(Main.i, a);
+                            Buyer.choice();
+                        } else {
+                            System.out.println("Wrong amount");
+                            Buyer.choice();
+                        }
+                    } else {
+                        System.out.println("You don't have that in your cart!");
+                        Buyer.choice();
+                    }
+
+
+                } else if (s.equals("Pencil")) {
+                    if (Pencil.pencillist.get(Main.i) > 0) {
+                        System.out.println("How much you want?");
+                        Scanner b = new Scanner(System.in);
+                        int a = b.nextInt();
+                        if (a > Pencil.quantity + Pencil.stock) {
+                            System.out.println("We don't have that amount!");
+                            Buyer.choice();
+                        } else if (a >= 0) {
+                            Pencil.stock = Pencil.stock + Pencil.quantity - a;
+                            Pencil.quantity = a;
+                            Pencil.pencillist.set(Main.i, a);
+                        } else {
+                            System.out.println("Wrong amount!");
+                            Buyer.choice();
+                        }
+                    } else {
+                        System.out.println("You don't have that in your cart!");
+                        Buyer.choice();
+                    }
+
+                } else if (s.equals("Notebook")) {
+                    if (Notebook.notelist.get(Main.i) > 0) {
+                        System.out.println("How much you want?");
+                        Scanner b = new Scanner(System.in);
+                        int a = b.nextInt();
+                        if (a > Notebook.quantity + Notebook.stock) {
+                            System.out.println("We don't have that amount!");
+                            Buyer.choice();
+                        } else if (a >= 0) {
+                            Notebook.stock = Notebook.stock + Notebook.quantity - a;
+                            Notebook.quantity = a;
+                            Notebook.notelist.set(Main.i, a);
+                            Buyer.choice();
+                        } else {
+                            System.out.println("Wrong amount!");
+                            Buyer.choice();
+                        }
+                    } else {
+                        System.out.println("You don't have that in your cart!");
+                        Buyer.choice();
+                    }
+
+                } else if (s.equals("Paper")) {
+                    if (Paper.paplist.get(Main.i) > 0) {
+                        System.out.println("How much you want?");
+                        Scanner b = new Scanner(System.in);
+                        int a = b.nextInt();
+                        if (a > Paper.quantity + Paper.stock) {
+                            System.out.println("We don't have that amount!");
+                            Buyer.choice();
+                        } else if (a >= 0) {
+                            Paper.stock = Paper.stock + Paper.quantity - a;
+                            Paper.quantity = a;
+                            Paper.paplist.set(Main.i, a);
+                            Buyer.choice();
+
+                        } else {
+                            System.out.println("Wrong amount!");
+                            Buyer.choice();
+
+                        }
+                    } else {
+                        System.out.println("You don't have that in your cart!");
+                        Buyer.choice();
+
+                    }
+                } else {
+                    System.out.println("You don't have that in your cart!!");
+                    Buyer.choice();
+
+                }
+            } else if (f.equals("3")) {
+                ShopingCart.checkout();
+            } else {
+                System.out.println("Wrong choice");
+                Buyer.choice();
+            }
+        }
+    }
+    public static void clearcart(){
+        Pen.stock = Pen.penlist.get(Main.i) + Pen.stock;
+        Pencil.stock = Pencil.pencillist.get(Main.i) + Pencil.stock;
+        Notebook.stock = Notebook.notelist.get(Main.i) + Notebook.stock;
+        Paper.stock = Paper.paplist.get(Main.i) + Paper.stock;
+
+        Pen.quantity = 0;
+        Paper.quantity = 0;
+        Notebook.quantity = 0;
+        Pencil.quantity = 0;
+
+        Pen.penlist.set(Main.i,0);
+        Pencil.pencillist.set(Main.i,0);
+        Notebook.notelist.set(Main.i,0);
+        Paper.paplist.set(Main.i,0);
+        System.out.print("Your order has deleted\n");
+    }
+}
