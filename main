@@ -1,0 +1,97 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static String usernamee;
+
+    public static void standardbuyers(){
+        Buyer.Username.add("makis");
+        Buyer.Email.add("makis@s");
+        Buyer.Username.add("kitsos");
+        Buyer.Email.add("kitsos@s");
+        Buyer.Category.add("Gold");
+        Buyer.Category.add("Silver");
+        Buyer.points.add(230);
+        Buyer.points.add(140);
+
+        Pen.penlist.add(5);
+        Paper.paplist.add(13);
+        Pencil.pencillist.add(0);
+        Notebook.notelist.add(0);
+
+        Pen.penlist.add(9);
+        Paper.paplist.add(0);
+        Pencil.pencillist.add(0);
+        Notebook.notelist.add(20);
+
+    }
+
+    static int  i;
+
+    public static void login() throws Exception
+    {
+        System.out.println("\nEnter your email");
+        Scanner w =new Scanner(System.in);
+        String email = w.nextLine();
+        usernamee = email;
+        if (email.equals("gogas")) {
+            System.out.println("Welcome Boss!");
+            Owner.owner();
+        }
+
+        if (Buyer.Email.contains(email)){
+
+
+
+            for ( i=0; i<Buyer.Email.size(); i++)
+            {
+                if (Buyer.Email.get(i).equals(email)){
+                    System.out.println("Welcome " + Buyer.Username.get(i) +"\nCategory: "+ Buyer.Category.get(i)+"\nPoints: "+Buyer.points.get(i));
+                    Buyer.choice();
+                    break;
+                }
+            }
+        }
+        else
+        {
+            System.out.println("register?(y/n)");
+                register();
+                login();}
+
+        }
+        public static void register() throws Exception {
+
+
+            Scanner t = new Scanner(System.in);
+            String reg = t.nextLine();
+            if (reg.equals("y")) {
+                System.out.println("Enter your name:");
+                Scanner e = new Scanner(System.in);
+                String s = e.nextLine();
+                if (Buyer.Username.contains(s)) {
+                    System.out.println("This user already exist!");
+                    login();
+                }
+
+                System.out.println("Enter your email:");
+                Scanner g = new Scanner(System.in);
+                String u = g.nextLine();
+
+                if (Buyer.Email.contains(u)) {
+                    System.out.println("This email already exist!");
+                    login();
+                }
+                Buyer.Username.add(s);
+                Buyer.Email.add(u);
+                Buyer.points.add(0);
+                Buyer.Category.add("Bronze");
+                Pen.penlist.add(0);
+                Paper.paplist.add(0);
+                Notebook.notelist.add(0);
+                Pencil.pencillist.add(0);
+                System.out.println("Thanks for your sign up\n");
+
+            }
+        }
+
+}
