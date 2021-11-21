@@ -1,0 +1,94 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Owner extends User{
+    public static ArrayList owners = new ArrayList();
+    protected static ArrayList itemordered = new ArrayList();
+
+    public static void owner() throws Exception {
+
+        Scanner mj = new Scanner(System.in);
+
+        System.out.println("\nPick a choice\n\n1) browse store\n2) check status\n3) Back\n4) search by id\n5) logout\n6) exit programm\n");
+        Scanner c = new Scanner(System.in);
+        String cd = c.nextLine();
+        while (true) {
+            switch (cd) {
+                case "1":
+                   eshop.updateitemstock();
+                   owner();
+                    break;
+                case "2":
+
+                    eshop.checkstatus();
+                    System.out.println("\n1) add buyer\n2) remove buyer\n0) Back");
+                    Scanner scanner=new Scanner(System.in);
+                    String e = scanner.nextLine();
+                    if ( e.equals("1")){
+                        System.out.println("y/n");
+                        eshop.addbuyer();
+                        owner();
+
+                    }
+
+                    else if (e.equals("2")) {
+                        eshop.removebuyer();
+                    }
+                    else if(e.equals("0"))
+                    {
+                        owner();
+                    }
+                    else
+                    {
+                        owner();
+                    }
+                    owner();
+
+                    break;
+                case "3":
+                    System.out.println("You are at the main page. Type 5 to logout!");
+                    owner();
+                    break;
+                case "4":
+                    System.out.println("Give the id of the product:");
+                    Scanner scanner1=new Scanner(System.in);
+                    String op = scanner1.nextLine();
+                    if (op.equals("1")){
+                        Pen.getDetails();
+                        owner();
+                        break;
+                    }
+                    else if(op.equals("2")){
+                        Pencil.getDetails();
+                        owner();
+                        break;
+                    }
+                    else if (op.equals("3"))
+                    {
+                        Notebook.getDetails();
+                        owner();
+                        break;
+                    }
+                    else if (op.equals("4")){
+                        Paper.getDetails();
+                        owner();
+                        break;
+                    }
+                    else {
+                        System.out.println("There is no item with that id");
+                        owner();
+                        break;
+                    }
+                case "5":
+                    Main.login();
+                    break;
+                case "6":
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Wrong choice!");
+                    owner();
+            }
+            break;
+        }
+    }
