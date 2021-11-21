@@ -1,0 +1,34 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Pen extends Item
+{
+
+    public static String Name="Pen";
+    public static double price=0.23;
+    public static int stock=20;
+    public static String  description="Kalo stilo";
+    public static int id=1;
+    public static String color="Tis fwtias";
+    public static double tipSize=15;
+    public static int quantity=0;
+
+    protected static List<Integer> penlist =new ArrayList<>();
+
+    public Pen()
+    {
+        this.Name=Name;
+        this.price=price;
+        this.stock=stock;
+        this.description=description;
+        this.id=id;
+        this.color=color;
+        this.tipSize=tipSize;
+    }
+
+    public static void getDetails()
+    {
+        System.out.println("Name: "+Name +"\n"+"price: "+price +"\n"+ "stock: "+ stock+"\n"+"description: "+description+"\n"+"id: "+id+"\n"+"color: "+color+"\n"+"tipSize(mm): " + tipSize);
+
+    }
+}
