@@ -1,0 +1,31 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Pencil extends Item
+{
+    public static String Name="Pencil";
+    public static double price=0.12;
+    public static int stock=20;
+    public static String description="Nice Pencil";
+    public static int id=2;
+    public static String Type="H";
+    public static double tipSize=0.12;
+    public static int quantity=0;
+    protected static List<Integer> pencillist =new ArrayList<>();
+
+    public Pencil()
+    {
+        this.Name=Name;
+        this.price=price;
+        this.stock=stock;
+        this.description=description;
+        this.id=id;
+        this.Type=Type;
+        this.tipSize=tipSize;
+    }
+
+    public static void getDetails()
+    {
+        System.out.println("Name: "+Name +"\n"+"price: "+price +"\n"+ "stock: "+ stock+"\n"+"description: "+description+"\n"+"id: "+id+"\n"+"Type: "+Type+"\n"+"tipSize(mm): " + tipSize);
+    }
+}
