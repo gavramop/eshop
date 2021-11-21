@@ -1,0 +1,32 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Paper extends Item
+{
+
+    public static String Name="Paper";
+    public static double price=0.02;
+    public static int stock=50;
+    public static String description="Nice Paper";
+    public static int id=4;
+    public static int weight=10;
+    public static int pages=100;
+    public static int quantity=0;
+    protected static List<Integer> paplist =new ArrayList<>();
+
+    public void Paper()
+    {
+        this.Name=Name;
+        this.price=price;
+        this.stock=stock;
+        this.description=description;
+        this.id=id;
+        this.weight=weight;
+        this.pages=pages;
+    }
+
+    public static void getDetails()
+    {
+        System.out.println("Name: "+Name +"\n"+"price: "+price +"\n"+ "stock: "+ stock+"\n"+"description: "+description+"\n"+"id: "+id+"\n"+"weight: "+weight+"\n"+"pages : " + pages);
+    }
+}
