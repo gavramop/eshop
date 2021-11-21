@@ -1,0 +1,248 @@
+import java.util.*;
+
+public class Buyer extends User
+{
+    protected static List<String> Username = new ArrayList<>();
+    protected static List<String> Email = new ArrayList<>();
+    protected static List<String> Category = new ArrayList<>();
+    protected static List<Integer> points = new ArrayList<>();
+
+    static void status()
+    {
+
+        System.out.println("\nusers: ");
+        for (int i=0; i<Buyer.Email.size(); i++)
+        {
+
+            System.out.println(Buyer.Username.get(i)+" " +Buyer.Category.get(i)+" "+Buyer.points.get(i));
+            System.out.println("Pen: "+Pen.penlist.get(i)+" Pencil: "+Pencil.pencillist.get(i)+" Notebook: "+Notebook.notelist.get(i)+" Paper: "+Paper.paplist.get(i)+"\n");
+        }
+    }
+
+    public static void choice() throws Exception {
+
+        Scanner w = new Scanner(System.in);
+        System.out.println("\n1) browse store\n2) view cart\n3) checkout\n4) back\n5) logout\n6) exit programm");
+        Scanner x = new Scanner(System.in);
+        String kles = x.nextLine();
+
+        switch (kles){
+            case "1":
+                //browse store
+                store();
+                break;
+            case "2":
+                //view cart
+                ShopingCart.showcart();
+                break;
+            case "3":
+                /*checkout*/
+               ShopingCart.checkout();
+                break;
+            case "4":
+                //back
+               System.out.println("You are at the main page. Type 5 to logout!");
+                    choice();
+                break;
+            case "5":
+                //logout
+                Pen.quantity=0;
+                Pencil.quantity=0;
+                Notebook.quantity=0;
+                Paper.quantity=0;
+
+                Main.login();
+                break;
+
+            case "6":
+                System.exit(0);
+                break;
+            default:
+                choice();
+        }
+    }
+    public static void store() throws Exception {
+
+        System.out.println("========================================");
+        System.out.println("WELCOME TO MAKIS ESHOP !!!");
+        System.out.println("========================================");
+        System.out.println("The products are:\n 1) Pen (" + Pen.stock + ")\n 2) Pencil (" + Pencil.stock + ")\n 3) Notebook (" + Notebook.stock + ")\n 4) Paper (" + Paper.stock + ")\n 5) back\n");
+        Scanner t = new Scanner(System.in);
+        String mell = t.nextLine();
+        switch (mell) {
+            case "1":
+                Pen pen;
+                pen = new Pen();
+                pen.getDetails();
+                System.out.println("\nWant to buy it?(y/n)\n");
+                Scanner h = new Scanner(System.in);
+                String q = h.nextLine();
+
+                if (q.equals("y")){
+                    System.out.println("How much?");
+                    Scanner k = new Scanner(System.in);
+                    int sx = k.nextInt();
+
+                do {
+
+                    if (sx > Pen.stock) {
+                        System.out.println("We don't have that much!");
+                        store();
+                        break;
+                    } else
+                    {for (int i = 0; i < sx; i++)
+                    {Pen.stock--;}
+                    Pen.quantity = Pen.quantity + sx;
+                    int a = Pen.penlist.get(Main.i)+Pen.quantity;
+                    Pen.penlist.set(Main.i,a);
+                        System.out.println("Your product has added to your cart!");
+                    }
+                    store();
+
+
+                    break;
+                } while (Pen.stock > 0);
+                break;
+            }
+
+                else
+                    store();
+
+                break;
+
+                case "2":
+                    Pencil pencil = new Pencil();
+                    pencil.getDetails();
+                    System.out.println("\nWant to buy it?(y/n)\n");
+                    Scanner r = new Scanner(System.in);
+                    String w =  r.nextLine();
+
+                    if (w.equals("y")) {
+                        System.out.println("How much?");
+                        Scanner k = new Scanner(System.in);
+                        int d = k.nextInt();
+
+                        do {
+                            if (d > Pencil.stock) {
+                                System.out.println("We don't have that much!");
+                                store();
+                                break;
+                            } else
+                                for (int i = 0; i < d; i++)
+                                {Pencil.stock--;}
+                                Pencil.quantity=Pencil.quantity+d;
+                            int a = Pencil.pencillist.get(Main.i)+Pencil.quantity;
+                            Pencil.pencillist.set(Main.i,a);
+
+
+
+                            System.out.println("Your product has added to your cart!");
+                                    store();
+
+                            break;
+                        } while (Pencil.stock > 0);
+                    } else
+
+                    store();
+                    break;
+
+                case "3":
+                    Notebook notebook = new Notebook();
+                    notebook.getDetails();
+                    System.out.println("Want to buy it?(y/n)\n");
+                    Scanner gr =new Scanner(System.in);
+                    String m = gr.nextLine();
+
+                    if (m.equals("y"))
+                    {
+                        System.out.println("How much?");
+                        Scanner num = new Scanner(System.in);
+                        int ssss = num.nextInt();
+
+                        do {
+                            if (ssss > Notebook.stock) {
+                                System.out.println("We don't have that much!");
+                                store();
+                                break;
+                            } else
+                                for (int i = 0; i < ssss; i++)
+                                {Notebook.stock--;}
+                                Notebook.quantity=Notebook.quantity+ssss;
+                            int a = Notebook.notelist.get(Main.i)+Notebook.quantity;
+                            Notebook.notelist.set(Main.i,a);
+
+
+
+                            System.out.println("Your product has added to your cart!");
+                                    store();
+                            break;
+                            } while (Notebook.stock > 0);
+                    } else
+
+                    store();
+                    break;
+                case "4":
+                    Paper paper = new Paper();
+                    paper.getDetails();
+                    System.out.println("\nWant to buy it?(y/n)\n");
+                    Scanner jj = new Scanner(System.in);
+                    String nj =jj.nextLine();
+
+                    if (nj.equals("y"))
+                    {
+                        System.out.println("How much?");
+                        Scanner num = new Scanner(System.in);
+                        int f = num.nextInt();
+
+                        do {
+                            if (f > Paper.stock)
+                            {
+                                System.out.println("We don't have that much!");
+                                store();
+                                break;
+                            }
+                            else
+                                for (int i = 0; i < f; i++)
+                                {Paper.stock--;}
+                                Paper.quantity=Paper.quantity+f;
+                            int a = Paper.paplist.get(Main.i)+Paper.quantity;
+                            Paper.paplist.set(Main.i,a);
+
+
+
+                            System.out.println("Your product has added to your cart!");
+                                store();
+                                    break;
+                            } while (Paper.stock > 0);
+                            break;
+                    }
+                    else
+                        store();
+                    break;
+
+                case "5":
+                        choice();
+                    break;
+        }
+    }
+    public static void bonusSetCategory() throws Exception {
+        System.out.println("Your order is copmleted");
+        ShopingCart.category();
+
+        int bonus = (int) (ShopingCart.sum*0.1);
+
+        ShopingCart.t = ShopingCart.t+bonus;
+        Buyer.points.set(Main.i, ShopingCart.t);
+        System.out.println("your points "+Buyer.points.get(Main.i));
+        if (Buyer.points.get(Main.i)<100)
+        {
+            Buyer.Category.set(Main.i,"Bronze");
+        }
+        else if (Buyer.points.get(Main.i) >= 100 && Buyer.points.get(Main.i)<200){
+            Buyer.Category.set(Main.i,"Silver");
+        }
+        else {
+            Buyer.Category.set(Main.i,"Gold");
+        }
+    }
+}
