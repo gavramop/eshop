@@ -1,0 +1,30 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Notebook extends Item
+{
+
+    public static String Name="Notebook";
+    public static double price=2.37;
+    public static int stock=20;
+    public static String description="Nice Notebook";
+    public static int id=3;
+    public static int sections=3;
+    public static int quantity=0;
+    protected static List<Integer> notelist =new ArrayList<>();
+
+    public Notebook()
+    {
+        this.Name=Name;
+        this.price=price;
+        this.stock=stock;
+        this.description=description;
+        this.id=id;
+        this.sections=sections;
+    }
+
+    public static void getDetails()
+    {
+        System.out.println( "Name: "+Name +"\n"+"price: "+price +"\n"+ "stock: "+ stock+"\n"+"description: "+description+"\n"+"id: "+id+"\n"+"sections: "+sections+"\n");
+    }
+}
