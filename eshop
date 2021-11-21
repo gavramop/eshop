@@ -1,0 +1,125 @@
+import java.util.*;
+import java.util.Scanner;
+
+public class eshop {
+    protected static ArrayList<String> item = new ArrayList<>();
+
+    public eshop() throws Exception {
+    }
+
+
+    public static void addNewItem() throws Exception {
+        Scanner Name = new Scanner(System.in);
+        System.out.println("==============");
+        System.out.println("Enter product Name: ");
+        String ok = Name.nextLine();
+        item.add(ok);
+    }
+
+    static void removeitem() {
+        Scanner Name = new Scanner(System.in);
+        System.out.println("==============");
+        System.out.println("Enter product Name: ");
+        String ok = Name.nextLine();
+        if (item.contains(ok)) {
+            item.remove(ok);
+        } else
+            System.out.println("This item doesn't exist");
+    }
+
+    static void standardItems() {
+        item.add("Pen");
+        item.add("Pencil");
+        item.add("Notebook");
+        item.add("Paper");
+    }
+
+    static void showItem() {
+        for (String u : item) {
+            System.out.println(u);
+        }
+    }
+
+    public static void addbuyer() throws Exception {
+        Main.register();
+    }
+
+    static int z;
+
+    public static void removebuyer() {
+
+        System.out.println("dwse to onoma pou thes na afereseis");
+        Scanner s = new Scanner(System.in);
+        String rem = s.nextLine();
+        if (Buyer.Username.contains(rem)) {
+            for (z = 0; z <= Buyer.Username.size(); z++) {
+                if (Buyer.Username.get(z).equals(rem)) {
+                    Pen.stock = Pen.penlist.get(z) + Pen.stock;
+                    Pencil.stock = Pencil.pencillist.get(z) + Pencil.stock;
+                    Notebook.stock = Notebook.notelist.get(z) + Notebook.stock;
+                    Paper.stock = Paper.paplist.get(z) + Paper.stock;
+                    Buyer.Username.remove(z);
+                    Buyer.Email.remove(z);
+                    Buyer.Category.remove(z);
+                    Buyer.points.remove(z);
+                    Pen.penlist.remove(z);
+                    Pencil.pencillist.remove(z);
+                    Notebook.notelist.remove(z);
+                    Paper.paplist.remove(z);
+                    System.out.println("aferethike o :" + rem);
+                }
+
+            }
+            z = 0;
+
+        } else {
+            System.out.println("den uparxei to onoma auto");
+        }
+    }
+
+    public static void checkstatus() {
+        Buyer.status();
+    }
+
+    public static void updateitemstock() throws Exception {
+        System.out.println("The products are:\n1) Pen (" + Pen.stock + ")\n2) Pencil (" + Pencil.stock + ")\n3) Notebook (" + Notebook.stock + ")\n4) Paper (" + Paper.stock + ")\n5) add item\n6) show items\n7) remove item\n0) back");
+        Scanner d = new Scanner(System.in);
+        System.out.println("Which one you want to change?");
+        String ss = d.nextLine();
+        Scanner f = new Scanner(System.in);
+
+        if (ss.equals("1")) {
+            System.out.println("How much you want to do them?");
+            int a = f.nextInt();
+            Pen.stock = a;
+        } else if (ss.equals("2")) {
+            System.out.println("How much you want to do them?");
+            int a = f.nextInt();
+            int x = a;
+            Pencil.stock = x;
+        } else if (ss.equals("3")) {
+            System.out.println("How much you want to do them?");
+            int a = f.nextInt();
+            int x = a;
+            Notebook.stock = x;
+        } else if (ss.equals("4")) {
+            System.out.println("How much you want to do them?");
+            int a = f.nextInt();
+            int x = a;
+            Paper.stock = x;
+        } else if (ss.equals("5")) {
+            addNewItem();
+             Owner.owner();
+        } else if (ss.equals("6")) {
+            eshop.showItem();
+            Owner.owner();
+        } else if (ss.equals("7")) {
+            eshop.removeitem();
+            Owner.owner();
+        } else if (ss.equals("0")) {
+            Owner.owner();
+        } else
+            System.out.println("Wrong choice");
+            Owner.owner();
+    }
+}
